@@ -17,7 +17,8 @@ export default function styleConstructor(theme = {}) {
     },
     dayText: {
       fontSize: 14,
-      fontWeight: '300',
+      fontWeight: appStyle.textDayFontWeight,
+      fontFamily: appStyle.textDayFontFamily,
       color: appStyle.agendaDayTextColor,
       fontFamily: appStyle.agendaDayFontFamily,
       marginTop: -5,
