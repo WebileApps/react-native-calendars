@@ -55,7 +55,6 @@ export default class AgendaView extends Component {
     renderEmptyData: PropTypes.func,
     /** specify your item comparison function for increased performance */
     rowHasChanged: PropTypes.func,
-    /** Max amount of months allowed to scroll to the past. Default = 50 */
     pastScrollRange: PropTypes.number,
     /** Max amount of months allowed to scroll to the future. Default = 50 */
     futureScrollRange: PropTypes.number,
@@ -65,6 +64,7 @@ export default class AgendaView extends Component {
     minDate: PropTypes.any,
     /** Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined */
     maxDate: PropTypes.any,
+
     /** If firstDay=1 week starts from Monday. Note that dayNames and dayNamesShort should still start from Sunday. */
     firstDay: PropTypes.number,
     /** Collection of dates that have to be marked. Default = items */
@@ -73,6 +73,8 @@ export default class AgendaView extends Component {
     markingType: PropTypes.string,/* 
     /** Hide knob button. Default = false */
     hideKnob: PropTypes.bool,
+
+    isDefaultViewCalendar: PropTypes.any,
     /** Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting */
     monthFormat: PropTypes.string,
     /** A RefreshControl component, used to provide pull-to-refresh functionality for the ScrollView. */
@@ -98,8 +100,8 @@ export default class AgendaView extends Component {
 
     this.state = {
       scrollY: new Animated.Value(0),
-      calendarIsReady: false,
-      calendarScrollable: false,
+      calendarIsReady: Boolean(this.props.isDefaultViewCalendar),
+      calendarScrollable: Boolean(this.props.isDefaultViewCalendar),
       firstResevationLoad: false,
       selectedDay: parseDate(this.props.selected) || XDate(true),
       topDay: parseDate(this.props.selected) || XDate(true),
@@ -133,7 +135,7 @@ export default class AgendaView extends Component {
     // When user touches knob, the actual component that receives touch events is a ScrollView.
     // It needs to be scrolled to the bottom, so that when user moves finger downwards,
     // scroll position actually changes (it would stay at 0, when scrolled to the top).
-    this.setScrollPadPosition(this.initialScrollPadPosition(), false);
+    this.setScrollPadPosition(this.props.isDefaultViewCalendar ? 0 : this.initialScrollPadPosition(), false);
     // delay rendering calendar in full height because otherwise it still flickers sometimes
     setTimeout(() => this.setState({calendarIsReady: true}), 0);
   }
@@ -141,6 +143,11 @@ export default class AgendaView extends Component {
   onLayout(event) {
     this.viewHeight = event.nativeEvent.layout.height;
     this.viewWidth = event.nativeEvent.layout.width;
+    if (this.props.isDefaultViewCalendar) {
+      this.calendar.scrollToDay(this.state.selectedDay.clone().setDate(1), 0, false);
+    } else {
+      this.calendar.scrollToDay(this.state.selectedDay.clone(), this.calendarOffset(), false);
+    }
     this.forceUpdate();
   }
 

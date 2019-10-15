@@ -21,6 +21,7 @@ class CalendarHeader extends Component {
     renderArrow: PropTypes.func,
     hideDayNames: PropTypes.bool,
     weekNumbers: PropTypes.bool,
+    disableMonthSwitch: PropTypes.bool,
     onPressArrowLeft: PropTypes.func,
     onPressArrowRight: PropTypes.func
   };
@@ -50,10 +51,12 @@ class CalendarHeader extends Component {
     if (nextProps.month.toString('yyyy MM') !== this.props.month.toString('yyyy MM')) {
       return true;
     }
-    if (nextProps.showIndicator !== this.props.showIndicator) {
-      return true;
+
+    if (this.props.disableMonthSwitch !== nextProps.disableMonthSwitch) {
+      return true
     }
-    if (nextProps.hideDayNames !== this.props.hideDayNames) {
+
+    if (nextProps.showIndicator !== this.props.showIndicator) {
       return true;
     }
     if (nextProps.firstDay !== this.props.firstDay) {
@@ -95,6 +98,7 @@ class CalendarHeader extends Component {
         <TouchableOpacity
           onPress={this.onPressLeft}
           style={this.style.arrow}
+          disabled={this.props.disableMonthSwitch}
           hitSlop={{left: 20, right: 20, top: 20, bottom: 20}}
           testID={testID ? `${CHANGE_MONTH_LEFT_ARROW}-${testID}`: CHANGE_MONTH_LEFT_ARROW}
         >
@@ -108,6 +112,9 @@ class CalendarHeader extends Component {
       );
       rightArrow = (
         <TouchableOpacity
+            onPress={this.addMonth}
+            style={this.style.arrow}
+            disabled={this.props.disableMonthSwitch}
           onPress={this.onPressRight}
           style={this.style.arrow}
           hitSlop={{left: 20, right: 20, top: 20, bottom: 20}}
@@ -133,8 +140,8 @@ class CalendarHeader extends Component {
         <View style={this.style.header}>
           {leftArrow}
           <View style={{ flexDirection: 'row' }}>
-            <Text allowFontScaling={false} style={this.style.monthText} accessibilityTraits='header'>
-              {this.props.month.toString(this.props.monthFormat)}
+            <Text allowFontScaling={false} style={this.props.disableMonthSwitch ? this.style.blockedMonthText: this.style.monthText}>
+              {this.props.month.toString(this.props.monthFormat ? this.props.monthFormat : 'MMMM yyyy')}
             </Text>
             {indicator}
           </View>

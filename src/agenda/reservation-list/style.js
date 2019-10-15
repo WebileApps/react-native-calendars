@@ -12,16 +12,17 @@ export default function styleConstructor(theme = {}) {
     dayNum: {
       fontSize: 28,
       fontWeight: '200',
-      fontFamily: appStyle.textDayFontFamily,
-      color: appStyle.agendaDayNumColor
+      color: appStyle.agendaDayNumColor,
+      fontFamily: appStyle.agendaDayFontFamily
     },
     dayText: {
       fontSize: 14,
       fontWeight: appStyle.textDayFontWeight,
       fontFamily: appStyle.textDayFontFamily,
       color: appStyle.agendaDayTextColor,
-      backgroundColor: 'rgba(0,0,0,0)',
-      marginTop: -5
+      fontFamily: appStyle.agendaDayFontFamily,
+      marginTop: -5,
+      backgroundColor: 'rgba(0,0,0,0)'
     },
     day: {
       width: 63,

@@ -1,5 +1,4 @@
 import { Platform } from 'react-native';
-
 export const foregroundColor = '#ffffff';
 export const backgroundColor = '#f4f4f4'; // Agenda's reservations bg color
 export const separatorColor = '#e8e9ec'; // not in use
@@ -14,7 +13,9 @@ export const textLinkColor = '#00adf5';
 export const textSecondaryColor = '#7a92a5';
 
 export const textDayFontFamily = 'System';
+export const textDayFontWeight = null;
 export const textMonthFontFamily = 'System';
+export const textMonthFontWeight = null;
 export const textDayHeaderFontFamily = 'System';
 export const todayButtonFontFamily = 'System';
 
@@ -46,6 +47,7 @@ export const disabledDotColor = undefined;
 export const todayDotColor = undefined;
 export const arrowColor = textLinkColor;
 export const monthTextColor = textDefaultColor;
+export const blockedMonthTextColor = "#c2c0c2";
 export const indicatorColor = undefined; // use the default color of React Native ActivityIndicator
 export const agendaDayTextColor = '#7a92a5';
 export const agendaDayNumColor = '#7a92a5';
