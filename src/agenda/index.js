@@ -285,6 +285,9 @@ export default class AgendaView extends Component {
       this.props.onDayPress(xdateToData(day));
     }
   }
+  renderEmptyDate = () => {
+    return <View/>
+  }
 
   renderReservations() {
     return (
@@ -295,7 +298,7 @@ export default class AgendaView extends Component {
         rowHasChanged={this.props.rowHasChanged}
         renderItem={this.props.renderItem}
         renderDay={this.props.renderDay}
-        renderEmptyDate={this.props.renderEmptyDate}
+        renderEmptyDate={this.props.renderEmptyDate || this.renderEmptyDate}
         reservations={this.props.items}
         selectedDay={this.state.selectedDay}
         renderEmptyData={this.props.renderEmptyData}

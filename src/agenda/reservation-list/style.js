@@ -20,7 +20,6 @@ export default function styleConstructor(theme = {}) {
       fontWeight: appStyle.textDayFontWeight,
       fontFamily: appStyle.textDayFontFamily,
       color: appStyle.agendaDayTextColor,
-      fontFamily: appStyle.agendaDayFontFamily,
       marginTop: -5,
       backgroundColor: 'rgba(0,0,0,0)'
     },

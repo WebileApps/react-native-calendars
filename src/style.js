@@ -13,9 +13,7 @@ export const textLinkColor = '#00adf5';
 export const textSecondaryColor = '#7a92a5';
 
 export const textDayFontFamily = 'System';
-export const textDayFontWeight = null;
 export const textMonthFontFamily = 'System';
-export const textMonthFontWeight = null;
 export const textDayHeaderFontFamily = 'System';
 export const todayButtonFontFamily = 'System';
 
